@@ -1,0 +1,285 @@
+{
+    "info": {
+        "name": "Alumni Portal API",
+        "description": "Complete API collection for Alumni Portal",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5000/api"
+        },
+        {
+            "key": "token",
+            "value": ""
+        }
+    ],
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/auth/register",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"gradYear\": 2020,\n  \"company\": \"TechCorp\",\n  \"location\": \"San Francisco\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/auth/login",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Get My Profile",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/users/me"
+                    }
+                },
+                {
+                    "name": "Update My Profile",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/users/me",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"skills\": [\"Python\", \"Machine Learning\", \"React\"],\n  \"interests\": [\"AI\", \"Startups\"],\n  \"optInMentor\": true,\n  \"bio\": \"Passionate about AI and education\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Recommendations",
+            "item": [
+                {
+                    "name": "Get Recommendations",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/recommendations"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Directory",
+            "item": [
+                {
+                    "name": "Search Alumni",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/directory?name=John&year=2020&company=TechCorp",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "directory"
+                            ],
+                            "query": [
+                                {
+                                    "key": "name",
+                                    "value": "John"
+                                },
+                                {
+                                    "key": "year",
+                                    "value": "2020"
+                                },
+                                {
+                                    "key": "company",
+                                    "value": "TechCorp"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Events",
+            "item": [
+                {
+                    "name": "Get All Events",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/events"
+                    }
+                },
+                {
+                    "name": "Create Event (Admin)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/events",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Alumni Networking Night\",\n  \"description\": \"Join us for an evening of networking\",\n  \"startDate\": \"2025-12-15T18:00:00Z\",\n  \"endDate\": \"2025-12-15T21:00:00Z\",\n  \"location\": \"San Francisco\",\n  \"capacity\": 50,\n  \"ticketPrice\": 25\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Register for Event",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/events/EVENT_ID/register"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Jobs",
+            "item": [
+                {
+                    "name": "Get All Jobs",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/jobs"
+                    }
+                },
+                {
+                    "name": "Create Job (Admin)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/jobs",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Senior ML Engineer\",\n  \"company\": \"AI Startup\",\n  \"description\": \"Looking for experienced ML engineer\",\n  \"location\": \"Remote\",\n  \"type\": \"Full-time\",\n  \"tags\": [\"Python\", \"Machine Learning\", \"TensorFlow\"],\n  \"applyUrl\": \"https://example.com/apply\",\n  \"salary\": \"$120k-$180k\"\n}"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Donations",
+            "item": [
+                {
+                    "name": "Create Donation",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/donations",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"amount\": 50,\n  \"message\": \"Happy to support the alumni network!\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get My Donations",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": "{{baseUrl}}/donations/my"
+                    }
+                }
+            ]
+        }
+    ]
+}

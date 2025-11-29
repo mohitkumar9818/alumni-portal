@@ -1,0 +1,92 @@
+========================================
+COMMANDS TO RUN NOW
+========================================
+
+The project is running! Here's what to do:
+
+========================================
+STEP 1: Open the App
+========================================
+
+Open your browser and go to:
+
+http://localhost:5173
+
+You should see the login page!
+
+========================================
+STEP 2: Fix MongoDB (REQUIRED)
+========================================
+
+1. Go to: https://cloud.mongodb.com
+2. Login with your credentials
+3. Click "Network Access" (left sidebar)
+4. Click "Add IP Address" button
+5. Click "Allow Access from Anywhere"
+6. Click "Confirm"
+7. Wait 1-2 minutes
+
+========================================
+STEP 3: Seed Database (REQUIRED)
+========================================
+
+After MongoDB is fixed, run this command:
+
+seed-all-data.bat
+
+Wait for it to complete (10-20 seconds)
+
+========================================
+STEP 4: Refresh Browser
+========================================
+
+Go back to your browser and press:
+
+Ctrl + Shift + R
+
+Now try these pages:
+- Dashboard
+- Events
+- Jobs
+- Mentors
+
+They should all show data!
+
+========================================
+OPTIONAL: Install AI Service
+========================================
+
+If you want AI chat features:
+
+cd ai-service
+pip install fastapi uvicorn google-generativeai python-dotenv
+
+Then the AI service will work automatically.
+
+========================================
+TESTING COMMANDS
+========================================
+
+Test backend health:
+curl http://localhost:5000/health
+
+Check what's running:
+diagnose-errors.bat
+
+View database data:
+view-database-data.bat
+
+========================================
+STOPPING THE PROJECT
+========================================
+
+To stop all services:
+- Press Ctrl+C in each terminal window
+- Or close the terminal windows
+
+========================================
+
+That's it! Follow these steps and your app 
+will be fully functional.
+
+========================================
