@@ -4,8 +4,7 @@ const leaderboardEntrySchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
-        unique: true
+        required: true
     },
     scores: {
         mentorship: { type: Number, default: 0 },
@@ -67,8 +66,8 @@ leaderboardEntrySchema.methods.assignBadges = function () {
 }
 
 // Index for faster queries
+leaderboardEntrySchema.index({ userId: 1 }, { unique: true })
 leaderboardEntrySchema.index({ 'scores.total': -1 })
-leaderboardEntrySchema.index({ userId: 1 })
 leaderboardEntrySchema.index({ rank: 1 })
 
 module.exports = mongoose.model('LeaderboardEntry', leaderboardEntrySchema)
