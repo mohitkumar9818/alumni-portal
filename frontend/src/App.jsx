@@ -22,6 +22,11 @@ function AppContent() {
     const { user } = useAuth()
     const isAuthPage = location.pathname === '/login' || location.pathname === '/register'
 
+    // If not authenticated and not on auth page, redirect to login
+    if (!user && !isAuthPage) {
+        return <Navigate to="/login" replace />
+    }
+
     return (
         <div className="app">
             {!isAuthPage && user && (
