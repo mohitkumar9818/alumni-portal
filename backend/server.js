@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -24,13 +25,39 @@ app.use('/api/directory', require('./routes/directory'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/leaderboard', require('./routes/leaderboard'));
 
+// Root route
+app.get('/', (_req, res) => {
+    res.json({
+        message: 'Alumni Portal API',
+        version: '1.0.0',
+        status: 'running',
+        endpoints: {
+            health: '/health',
+            auth: '/api/auth',
+            users: '/api/users',
+            events: '/api/events',
+            jobs: '/api/jobs',
+            donations: '/api/donations',
+            recommendations: '/api/recommendations',
+            directory: '/api/directory',
+            ai: '/api/ai',
+            leaderboard: '/api/leaderboard'
+        }
+    });
+});
+
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// API health check
+app.get('/api/health', (_req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
 // Error handler
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
     console.error(err.stack);
     res.status(err.status || 500).json({
         error: err.message || 'Internal Server Error'
